@@ -1,4 +1,4 @@
-gvkey,datadate,fyear,indfmt,consol,popsrc,datafmt,tic,curcd,xad,costat
+Url,Date,PageviewsPerMillion,PageviewsPerUser,Rank,ReachPerMilliongvkey,datadate,fyear,indfmt,consol,popsrc,datafmt,tic,curcd,xad,costat
 google.com,5/10/18,104300,7.7,1,504400160329,20181231,2018,INDL,C,D,STD,GOOGL,USD,6400.0000,A
 google.com,5/11/18,58740,4.09,1,496200160329,20181231,2018,INDL,C,D,STD,GOOGL,USD,6400.0000,A
 google.com,5/12/18,50300,3.51,2,477000160329,20181231,2018,INDL,C,D,STD,GOOGL,USD,6400.0000,A

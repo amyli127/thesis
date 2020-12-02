@@ -13,8 +13,8 @@ with open('google_activity.csv', 'r') as istr:
     with open('google_activity_xad.csv', 'w') as ostr:
         for i, line in enumerate(istr):
             if i == 0:
-                ostr.write(rHeadersStr)
+                line = line.rstrip('\n') + rHeadersStr
             else:
                 line = line.rstrip('\n') + googleDataToWriteStr
                 # print(line, file=ostr)
-                ostr.write(line)
+            ostr.write(line)
