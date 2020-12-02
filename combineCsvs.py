@@ -2,20 +2,19 @@ import csv
 
 fileReader = open("GOOGL_2018_XAD.csv", "r")
 csvReader = csv.reader(fileReader)
-fileWriter = open('google_activity.csv', 'a')
-csvWriter = csv.writer(fileWriter)
 
 rHeaders = next(fileReader)
 rHeadersStr = ''.join(rHeaders)
-# print(rHeaders)
 
 googleDataToWrite = next(fileReader)
 googleDataToWriteStr = ''.join(googleDataToWrite)
 
-# for i, row in enumerate(fileReader):
-#     if i == 0:
-#         csvWriter.write(rHeadersStr)
-#     csvWriter.write(googleDataToWriteStr)
-
-with fileWriter as file:
-    file.write(googleDataToWriteStr)
+with open('google_activity.csv', 'r') as istr:
+    with open('google_activity_xad.csv', 'w') as ostr:
+        for i, line in enumerate(istr):
+            if i == 0:
+                ostr.write(rHeadersStr)
+            else:
+                line = line.rstrip('\n') + googleDataToWriteStr
+                # print(line, file=ostr)
+                ostr.write(line)
