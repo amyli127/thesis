@@ -17,7 +17,7 @@
 
 import sys, os, base64, hashlib, hmac
 import logging, getopt
-import boto3
+# import boto3
 import getpass
 # from botocore.vendored import requests
 import requests
@@ -106,6 +106,11 @@ def parse_options( argv ):
             opts['action'] = opt[1]
         elif opt[0] == '-v' or opt[0] == '--verbose':
             log.verbose()
+
+    # opts['--key'] = "3cuw6DZVcwaV3SgZiRpmcatwL3huJnit4PWh7g6K"
+    # opts['-u'] = "ali12721@gmail.com"
+    # opts['--action'] = "TrafficHistory"
+    # opts['--options'] = "&Range=31&ResponseGroup=History&Start=20180510&Url=google.com&Output=json"
 
     if 'key' not in opts or \
        'user' not in opts or \
@@ -206,8 +211,8 @@ if __name__ == "__main__":
 
     user = opts['user']
 
-    if not os.path.isfile(credentials_file):
-        refresh_credentials(user)
+    # if not os.path.isfile(credentials_file):
+        # refresh_credentials(user)
 
     # Get credentials to access api from local file. Refresh credentials from Cognito pool if necessary
     while True:
@@ -222,10 +227,10 @@ if __name__ == "__main__":
         exp_time = float(expiration)
         cur_time = time.mktime(datetime.now().timetuple())
 
-        if cur_time > exp_time:
-            refresh_credentials(user)
-        else:
-            break
+        # if cur_time > exp_time:
+        #     # refresh_credentials(user)
+        # else:
+        #     break
 
     # Create a date for headers and the credential string
     t = datetime.utcnow()
