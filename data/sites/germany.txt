@@ -1,0 +1,17 @@
+google.com
+youtube.com
+google.de
+amazon.de
+ebay.de
+ebay-kleinanzeigen.de
+twitch.tv
+facebook.com
+yahoo.com
+netflix.com
+t-online.de
+zoom.us
+live.com
+microsoft.com
+bing.com
+yandex.ru
+telekom.com

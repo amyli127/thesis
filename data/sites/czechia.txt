@@ -1,0 +1,11 @@
+google.com
+youtube.com
+google.cz
+facebook.com
+microsoft.com
+netflix.com
+aliexpress.com
+microsoftonline.com
+yahoo.com
+twitch.tv
+amazon.com

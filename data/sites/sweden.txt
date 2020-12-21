@@ -1,0 +1,15 @@
+google.com
+youtube.com
+twitch.tv
+google.se
+facebook.com
+netflix.com
+live.com
+microsoftonline.com
+zoom.us
+imdb.com
+tradera.com, PYPL
+microsoft.com
+yahoo.com
+amazon.com
+swedbank.se
