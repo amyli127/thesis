@@ -30,7 +30,6 @@ hbogo.hu
 live.com
 google.pl
 olx.pl
-micrsoft.com
 gumtree.pl
 payu.com
 google.ee
@@ -90,7 +89,6 @@ amazon.co.uk
 365online.com
 ebay.ie
 google.fi
-microsoft.com
 ebay.de
 ebay-kleinanzeigen.de
 t-online.de
