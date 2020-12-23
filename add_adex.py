@@ -37,6 +37,6 @@ with open("data/web-traffic/batch2.csv", "r") as web_traffic, open("data/web-tra
                 url = line["Url"]
                 ticker = url_to_ticker[url]
                 line1 = line1.rstrip('\n')
-                newline = line1 + adex_info[ticker]
+                newline = line1 + "," + adex_info[ticker]
                 output.write(newline)
 
