@@ -4,7 +4,7 @@ import csv
 adex_info = {}          # map from ticker to line of adex info
 url_to_ticker = {}      # dict from url to ticker
 
-HEADER = "Url,Date,PageviewsPerMillion,PageviewsPerUser,Rank,ReachPerMillion,gvkey,datadate,fyear,tic,conm,curcd,revt,sale,xad,exch"
+HEADER = "Url,Date,PageviewsPerMillion,PageviewsPerUser,Rank,ReachPerMillion,gvkey,datadate,fyear,tic,conm,curcd,revt,sale,xad,exch\n"
 
 # populate adex info
 with open("data/ad-ex/batch2.csv", "r") as adex, open("data/ad-ex/batch2.csv", "r") as adex1:
@@ -33,10 +33,10 @@ with open("data/web-traffic/batch2.csv", "r") as web_traffic, open("data/web-tra
             # write header
             if i == 0:
                 output.write(HEADER)
-
-            url = line["Url"]
-            ticker = url_to_ticker[url]
-            line1 = line1.rstrip('\n')
-            newline = line1 + adex_info[ticker]
-            output.write(newline)
+            else:
+                url = line["Url"]
+                ticker = url_to_ticker[url]
+                line1 = line1.rstrip('\n')
+                newline = line1 + adex_info[ticker]
+                output.write(newline)
 
