@@ -1,112 +1,112 @@
-google.com, GOOGL
-youtube.com, GOOGL
-google.cz, GOOGL
-facebook.com, FB
-microsoft.com, MSFT
-netflix.com, NFLX
-aliexpress.com, BABA
-microsoftonline.com, MSFT
-yahoo.com, BABA
-twitch.tv, AMZN
-amazon.com, AMZN
-google.gr, GOOGL
-live.com, MSFT
-webex.com, CSCO
-instagram.com, FB
-google.se, GOOGL
-zoom.us, ZM
-imdb.com, AMZN
-tradera.com, PYPL
-swedbank.se, SWDBF
-google.be, GOOGL
-office.com, MSFT
-msn.com, MSFT
-amazon.fr, AMZN
-amazon.de, AMZN
-google.fr, GOOGL
-google.hu, GOOGL
-telekom.hu, DTEGY
-hbogo.hu, T
-google.pl, GOOGL
-olx.pl, NPSNY
-gumtree.pl, EBAY
-payu.com, NPSNY
-google.ee, GOOGL
-aliexpress.ru, BABA
-google.ru, GOOGL
-myshopify.com, SHOP
-ebay.com, EBAY
-bing.com, MSFT
-walmart.com, WMT
-etsy.com, ETSY
-apple.com, AAPL
-chase.com, JPM
-espn.com, DIS
-cnn.com, T
-bestbuy.com, BBY
-salesforce.com, CRM
-nytimes.com, NYT
-zillow.com, ZG
-adobe.com, ADBE
-linkedin.com, MSFT
-target.com, TGT
-dropbox.com, DBX
-okta.com, OKTA
-tmall.com, BABA
-force.com, CRM
-hulu.com, DIS
-wellsfargo.com, WFC
-homedepot.com, HD
-ups.com, UPS
-paypal.com, PYPL
-spotify.com, SPOT
-google.dk, GOOGL
-instructure.com, INST
-google.it, GOOGL
-amazon.it, AMZN
-ebay.it, EBAY
-virgilio.it, TIIAY
-google.nl, GOOGL
-amazonaws.com, AMZN
-yandex.ru, YNDX
-bol.com, ADRNY
-google.com.ua, GOOGL
-marktplaats.nl, EBAY
-amazon.nl, AMZN
-avito.ru, NPSNY
-google.hr, GOOGL
-google.ro, GOOGL
-emag.ro, NPSNY
-olx.ro, NPSNY
-twitch.com, AMZN
-ing.ro, ING
-google.sk, GOOGL
-shutterstock.com, SSTK
-google.ie, GOOGL
-amazon.co.uk, AMZN
-365online.com, BKRIY
-ebay.ie, EBAY
-google.fi, GOOGL
-google.de, GOOGL
-ebay.de, EBAY
-ebay-kleinanzeigen.de, EBAY
-t-online.de, DTEGY
-telekom.com, DTEGY
-google.bg, GOOGL
-ebay.com, EBAY
-google.at, GOOGL
-google.lv, GOOGL
-ebay.fr, EBAY
-cdiscount.com, CNVAF
-sfr.fr, ATUS
-google.pt, GOOGL
-sapo.pt, ATUS
-amazon.es, AMZN
-santander.pt, SAN
-meo.pt, ATUS
-google.es, GOOGL
-elpais.com, PRISY
-Bancosantander.es, SAN
-primevideo.com, AMZN
-abc.es, DIS
-bbva.es, BBVA
+google.com,GOOGL
+youtube.com,GOOGL
+google.cz,GOOGL
+facebook.com,FB
+microsoft.com,MSFT
+netflix.com,NFLX
+aliexpress.com,BABA
+microsoftonline.com,MSFT
+yahoo.com,BABA
+twitch.tv,AMZN
+amazon.com,AMZN
+google.gr,GOOGL
+live.com,MSFT
+webex.com,CSCO
+instagram.com,FB
+google.se,GOOGL
+zoom.us,ZM
+imdb.com,AMZN
+tradera.com,PYPL
+swedbank.se,SWDBY
+google.be,GOOGL
+office.com,MSFT
+msn.com,MSFT
+amazon.fr,AMZN
+amazon.de,AMZN
+google.fr,GOOGL
+google.hu,GOOGL
+telekom.hu,DTEGY
+hbogo.hu,T
+google.pl,GOOGL
+olx.pl,NPSNY
+gumtree.pl,EBAY
+payu.com,NPSNY
+google.ee,GOOGL
+aliexpress.ru,BABA
+google.ru,GOOGL
+myshopify.com,SHOP
+ebay.com,EBAY
+bing.com,MSFT
+walmart.com,WMT
+etsy.com,ETSY
+apple.com,AAPL
+chase.com,JPM
+espn.com,DIS
+cnn.com,T
+bestbuy.com,BBY
+salesforce.com,CRM
+nytimes.com,NYT
+zillow.com,Z
+adobe.com,ADBE
+linkedin.com,MSFT
+target.com,TGT
+dropbox.com,DBX
+okta.com,OKTA
+tmall.com,BABA
+force.com,CRM
+hulu.com,DIS
+wellsfargo.com,WFC
+homedepot.com,HD
+ups.com,UPS
+paypal.com,PYPL
+spotify.com,SPOT
+google.dk,GOOGL
+instructure.com,INST
+google.it,GOOGL
+amazon.it,AMZN
+ebay.it,EBAY
+virgilio.it,TIIAY
+google.nl,GOOGL
+amazonaws.com,AMZN
+yandex.ru,YNDX
+bol.com,ADRNY
+google.com.ua,GOOGL
+marktplaats.nl,EBAY
+amazon.nl,AMZN
+avito.ru,NPSNY
+google.hr,GOOGL
+google.ro,GOOGL
+emag.ro,NPSNY
+olx.ro,NPSNY
+twitch.com,AMZN
+ing.ro,ING
+google.sk,GOOGL
+shutterstock.com,SSTK
+google.ie,GOOGL
+amazon.co.uk,AMZN
+365online.com,BKRIY
+ebay.ie,EBAY
+google.fi,GOOGL
+google.de,GOOGL
+ebay.de,EBAY
+ebay-kleinanzeigen.de,EBAY
+t-online.de,DTEGY
+telekom.com,DTEGY
+google.bg,GOOGL
+ebay.com,EBAY
+google.at,GOOGL
+google.lv,GOOGL
+ebay.fr,EBAY
+cdiscount.com,CNVAF
+sfr.fr,ATUS
+google.pt,GOOGL
+sapo.pt,ATUS
+amazon.es,AMZN
+santander.pt,SAN
+meo.pt,ATUS
+google.es,GOOGL
+elpais.com,PRISY
+Bancosantander.es,SAN
+primevideo.com,AMZN
+abc.es,DIS
+bbva.es,BBVA
