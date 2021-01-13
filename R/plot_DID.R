@@ -1,4 +1,6 @@
 library(foreign)
+library(ggplot2)
+library(dplyr)
 
 # read in data
 activity <- read.csv('total-info1.csv', header=TRUE, sep=',')
@@ -22,6 +24,28 @@ activity_filtered$treated = ifelse(activity_filtered$Url %in% us_sites$V1, 0, 1)
 # create interaction term between time and treated
 activity_filtered$did = activity_filtered$time * activity_filtered$treated
 
-# estimate DID estimator
-didreg = lm(log(PageviewsPerMillion) ~ treated + time + did, data = activity_filtered)
-summary(didreg)
+
+##### plot DID #######
+
+# get summary data for group averages
+activity_filtered %>% 
+  group_by(Date,treated) %>% 
+  summarize(PageviewsPerMillion=mean(PageviewsPerMillion)) -> sumdata
+
+# create plot
+dd <- 
+  ggplot() + geom_line(data=activity_filtered,aes(x=Date,y=PageviewsPerMillion,group=treated,color=treated),
+                     size=1,alpha=0.25) + # plot the individual lines
+  geom_line(data=sumdata,aes(x=Date,y=PageviewsPerMillion,group=treated,color=treated),
+            size=2) + # plot the averages for each group
+  geom_vline(xintercept = 2018-05-18) + # intervention point
+  scale_color_manual(values=c("red","blue"), # label our groups
+                     labels=c("Control Average","Treatment Average")) +
+  labs(title="Difference in Differences",
+       x="Time",
+       y="Outcome") +
+  theme_minimal()
+
+plot(dd)
+
+
