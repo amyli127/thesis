@@ -56,4 +56,18 @@ for url in url_to_sum:
     proportional_pageviews = url_to_sum[url] / ticker_to_pageviews[ticker]
     url_to_proportional_adex[url] = 0 if url_to_adex[url] == 0 else proportional_pageviews * url_to_adex[url]
 
+
+HEADER = "Url,Date,PageviewsPerMillion,PageviewsPerUser,Rank,ReachPerMillion,gvkey,datadate,fyear,tic,conm,curcd,revt,sale,xad,exch,wxad\n"
+
 # write weighted adex
+with open("data/total-info1.csv", "r") as total_activity, open("data/total-info1.csv", "r") as total_activity1:
+    with open("data/total-info-weighted1.csv", "w") as output:
+        reader = csv.DictReader(total_activity)
+        for i, (forUrl, toRead) in enumerate(zip(reader, total_activity1)):
+            if i == 0:
+                output.write(HEADER)
+            else:
+                url = forUrl["Url"]
+                toRead = toRead.rstrip('\n')
+                newline = toRead + "," + str(url_to_proportional_adex[url]) + '\n'
+                output.write(newline)

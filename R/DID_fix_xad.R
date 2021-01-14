@@ -12,6 +12,9 @@ activity_filtered <- activity_filtered[complete.cases(activity_filtered$xad), ]
 # change date field to a date object
 activity_filtered$Date <- as.Date(activity_filtered$Date , format = "%Y-%m-%d")
 
+# change xad to be proportional to pageviews
+
+
 # create dummy var to indicate before or after treatment
 treatment_date = as.Date("2018-05-18")
 activity_filtered$time = ifelse(activity_filtered$Date < treatment_date, 0, 1)
