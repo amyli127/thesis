@@ -22,7 +22,6 @@ activity_filtered$spending = ifelse(activity_filtered$xad <= twentyfifth_percent
 #
 med_xad = median(activity_filtered$xad)
 
-
 # create dummy var to indicate before or after treatment
 treatment_date = as.Date("2018-05-18")
 activity_filtered$time = ifelse(activity_filtered$Date < treatment_date, 0, 1)
@@ -43,5 +42,5 @@ activity_filtered$did2 = activity_filtered$spending * activity_filtered$treated
 activity_filtered$did3 = activity_filtered$time * activity_filtered$treated * activity_filtered$spending
 
 # estimate DID estimator
-didreg = lm(log(PageviewsPerMillion) ~ treated + time + spending + did + did1 + did2 + did3 + revt + Rank + ReachPerMillion + sale + PageviewsPerUser, data = activity_filtered)
+didreg = lm(log(PageviewsPerMillion) ~ treated + time + spending + did + did1 + did2 + did3, data = activity_filtered)
 summary(didreg)

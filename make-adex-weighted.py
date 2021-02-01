@@ -54,7 +54,7 @@ with open("data/total-info1.csv", "r") as total_activity:
 for url in url_to_sum:
     ticker = url_to_ticker[url]
     proportional_pageviews = url_to_sum[url] / ticker_to_pageviews[ticker]
-    url_to_proportional_adex[url] = 0 if url_to_adex[url] == 0 else proportional_pageviews * url_to_adex[url]
+    url_to_proportional_adex[url] = 0 if url_to_adex[url] == 0 else round(proportional_pageviews * url_to_adex[url], 2)
 
 
 HEADER = "Url,Date,PageviewsPerMillion,PageviewsPerUser,Rank,ReachPerMillion,gvkey,datadate,fyear,tic,conm,curcd,revt,sale,xad,exch,wxad\n"
