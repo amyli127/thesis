@@ -3,18 +3,18 @@ import csv
 
 
 # open output file and write headers
-output = csv.writer(open("data/web-traffic/batch2.csv", "a"))
+output = csv.writer(open("data/web-traffic/2017-help.csv", "a"))
 # output.writerow(["Url", "Date", "PageviewsPerMillion", "PageviewsPerUser", "Rank", "ReachPerMillion"])
 
 
 # setup universal query fields
-API_key = "7H9WrorbrZ2gNI3U696P64wQe6jKlG5Xa9CQakn7"
+API_key = "UKvA8Oeun51JmSoNrhcYt7sSyhtprZBK6f1zEE90"
 headers = {'x-api-key': API_key}
 
 
 # put start dates into dictionary
 start_dates = {}
-with open("data/start-dates.csv", "r") as csvFile:
+with open("data/start-dates-2017.csv", "r") as csvFile:
     reader = csv.DictReader(csvFile, fieldnames=("start", "length"))
     for row in reader:
         start_dates[row["start"]] = row["length"]
@@ -33,6 +33,8 @@ def make_API_call(url, startdate, length):
     urlOne = [x["Value"] for x in argumentData if x["Name"] == "url"]
     url = urlOne[0]
 
+    print(siteData)
+    
     # write response to file
     for row in siteData:
         output.writerow([url,
@@ -48,7 +50,7 @@ with open("data/consolidated-sites2.txt", "r") as f:
     urls = f.read().splitlines()
     for url in urls:
         print(url)
-        # make api call for every start date in year (2018)
+        # make api call for every start date in year
         for startDate in start_dates:
             length = start_dates[startDate]
             make_API_call(url, startDate, length) 

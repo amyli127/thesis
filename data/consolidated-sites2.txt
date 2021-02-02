@@ -1,1 +1,3 @@
-santander.pt
+# this file was used to troubleshoot issues with consolidated-sites.txt when querying. all issues should be resolved -- in future, use consolidated-sites-filtered.txt
+twitch.com
+
