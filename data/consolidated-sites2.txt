@@ -1,3 +1,24 @@
-# this file was used to troubleshoot issues with consolidated-sites.txt when querying. all issues should be resolved -- in future, use consolidated-sites-filtered.txt
-twitch.com
-
+google.fi
+ebay.de
+ebay-kleinanzeigen.de
+t-online.de
+telekom.com
+google.bg
+ebay.com
+google.at
+google.de
+google.lv
+ebay.fr
+cdiscount.com
+sfr.fr
+google.pt
+sapo.pt
+amazon.es
+meo.pt
+msn.com
+google.es
+elpais.com
+Bancosantander.es
+primevideo.com
+abc.es
+bbva.es

@@ -26,8 +26,8 @@ with open("data/consolidated-sites-tickers.csv", "r") as csvFile:
 
 
 # consolidate info
-with open("data/web-traffic/batch2.csv", "r") as web_traffic, open("data/web-traffic/batch2.csv", "r") as web_traffic1:
-    with open("data/total-info1.csv", "w") as output:
+with open("data/web-traffic/2019.csv", "r") as web_traffic, open("data/web-traffic/2019.csv", "r") as web_traffic1:
+    with open("data/total-info-2019.csv", "w") as output:
         reader = csv.DictReader(web_traffic)
         for i, (line, line1) in enumerate(zip(reader, web_traffic1)):
             # write header

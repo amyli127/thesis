@@ -1,10 +1,6 @@
 import csv
 
 
-# open files
-# total_activity_file = open("data/total-info1.csv", "r")
-# proportional_activity = open("data/total-info-proportional1.csv", "w")
-
 url_to_sum = {}                 # map from url to sum of pageviews (used to calc avg)
 url_to_count = {}               # map from url to number of occurrences (used to calc avg)
 url_to_avg_pageviews = {}       # map from url to avg pageviews per million
@@ -13,11 +9,10 @@ url_to_adex = {}                # map from url to ad expenditure (not proportion
 url_to_ticker = {}
 ticker_to_pageviews = {}
 
-
 url_to_proportional_adex = {}   
 
 # read in pageview info
-with open("data/total-info1.csv", "r") as total_activity:
+with open("data/total-info-2017.csv", "r") as total_activity:
     reader = csv.DictReader(total_activity)
     for row in reader:
         url = row["Url"]
@@ -61,7 +56,7 @@ HEADER = "Url,Date,PageviewsPerMillion,PageviewsPerUser,Rank,ReachPerMillion,gvk
 
 # write weighted adex
 with open("data/total-info1.csv", "r") as total_activity, open("data/total-info1.csv", "r") as total_activity1:
-    with open("data/total-info-weighted1.csv", "w") as output:
+    with open("data/total-info-weighted2.csv", "w") as output:
         reader = csv.DictReader(total_activity)
         for i, (forUrl, toRead) in enumerate(zip(reader, total_activity1)):
             if i == 0:
