@@ -2,7 +2,7 @@ library(foreign)
 library(lubridate)
 
 # read in data
-activity <- read.csv('total-info1.csv', header=TRUE, sep=',')
+activity <- read.csv('total-info-2017-2019.csv', header=TRUE, sep=',')
 us_sites <- read.csv('sites/us.txt', header=FALSE)
 
 # filter data
@@ -10,9 +10,11 @@ vars <- c("Date", "Url", "PageviewsPerMillion", "PageviewsPerUser", "Rank", "Rea
 activity_filtered <- activity[vars]
 activity_filtered <- activity_filtered[complete.cases(activity_filtered$xad), ]
 activity_filtered$Date <- as.Date(activity_filtered$Date , format = "%Y-%m-%d")
+activity_filtered$year <- year(activity_filtered$Date)
 
 # create dummy var to indicate month
 activity_filtered$month <- month(activity_filtered$Date)
+activity_filtered$yr_month <- 12 * (activity_filtered$year - 2017) + activity_filtered$month
 
 # create dummy var to indicate before or after regulation
 treatment_date = as.Date("2018-05-18")
