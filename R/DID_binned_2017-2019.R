@@ -19,8 +19,15 @@ activity_filtered$year <- year(activity_filtered$Date)
 # change date field to a date object
 activity_filtered$Date <- as.Date(activity_filtered$Date , format = "%Y-%m-%d")
 
+# create dummy var to indicate before or after regulation
+treatment_date = as.Date("2018-05-18")
+activity_filtered$time = ifelse(activity_filtered$Date < treatment_date, 0, 1)
+
 # create dummy var to indicate treatment group
 activity_filtered$treated = ifelse(activity_filtered$Url %in% us_sites$V1, 0, 1)
+
+# create interaction term between time and treated
+activity_filtered$time_treated = activity_filtered$time * activity_filtered$treated
 
 # month dummy vars
 activity_filtered$jan_2017 <- ifelse(activity_filtered$month == 1 & activity_filtered$year == 2017, 1, 0)
@@ -113,13 +120,13 @@ didreg = lm(log(PageviewsPerMillion) ~ treated +
               jan2018_treated + feb2018_treated + mar2018_treated + apr2018_treated + may2018_treated + jun2018_treated + jul2018_treated + aug2018_treated + sep2018_treated + oct2018_treated + nov2018_treated + dec2018_treated +
               jan2019_treated + feb2019_treated + mar2019_treated + apr2019_treated + may2019_treated + jun2019_treated + jul2019_treated + aug2019_treated + sep2019_treated + oct2019_treated + nov2019_treated + dec2019_treated,
             data = activity_filtered)
+summary(didreg)
+
+# graph coefficients
 coef <- tidy(didreg)
 coef = filter(coef, term %in% c('jan2017_treated', 'feb2017_treated', 'mar2017_treated', 'apr2017_treated', 'may2017_treated', 'jun2017_treated', 'jul2017_treated', 'aug2017_treated', 'sep2017_treated', 'oct2017_treated', 'nov2017_treated', 'dec2017_treated',
                                 'jan2018_treated', 'feb2018_treated', 'mar2018_treated', 'apr2018_treated', 'may2018_treated', 'jun2018_treated', 'jul2018_treated', 'aug2018_treated', 'sep2018_treated', 'oct2018_treated', 'nov2018_treated', 'dec2018_treated',
                                 'jan2019_treated', 'feb2019_treated', 'mar2019_treated', 'apr2019_treated', 'may2019_treated', 'jun2019_treated', 'jul2019_treated', 'aug2019_treated', 'sep2019_treated', 'oct2019_treated', 'nov2019_treated', 'dec2019_treated'))
-#coef <- subset(coef, term!="treated")
 graph <- dwplot(coef,
-       vline = geom_vline(xintercept = 0, colour = "grey60", linetype = 2))
-       #hline = geom_hline(yintercept = "may2018_treated", colour = "grey60", linetype = 2))
+       vline = geom_vline(xintercept = 1.165637, colour = "grey60", linetype = 2))
 plot(graph)
-summary(didreg)

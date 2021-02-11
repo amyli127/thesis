@@ -55,8 +55,8 @@ for url in url_to_sum:
 HEADER = "Url,Date,PageviewsPerMillion,PageviewsPerUser,Rank,ReachPerMillion,gvkey,datadate,fyear,tic,conm,curcd,revt,sale,xad,exch,wxad\n"
 
 # write weighted adex
-with open("data/total-info1.csv", "r") as total_activity, open("data/total-info1.csv", "r") as total_activity1:
-    with open("data/total-info-weighted2.csv", "w") as output:
+with open("data/total-info-2017-2019.csv", "r") as total_activity, open("data/total-info-2017-2019.csv", "r") as total_activity1:
+    with open("data/total-info-weighted-2017-2019.csv", "w") as output:
         reader = csv.DictReader(total_activity)
         for i, (forUrl, toRead) in enumerate(zip(reader, total_activity1)):
             if i == 0:

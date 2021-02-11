@@ -1,7 +1,7 @@
 library(foreign)
 
 # read in data
-activity <- read.csv('total-info-weighted2.csv', header=TRUE, sep=',')
+activity <- read.csv('total-info-weighted-2017-2019.csv', header=TRUE, sep=',')
 us_sites <- read.csv('sites/us.txt', header=FALSE)
 
 # filter data
@@ -27,19 +27,19 @@ activity_filtered$time = ifelse(activity_filtered$Date < treatment_date, 0, 1)
 activity_filtered$treated = ifelse(activity_filtered$Url %in% us_sites$V1, 0, 1)
 
 # create interaction term between time and treated
-activity_filtered$did = activity_filtered$time * activity_filtered$treated
+activity_filtered$time_treated = activity_filtered$time * activity_filtered$treated
 
 # create interaction term between the time and spending
-activity_filtered$did1 = activity_filtered$time * activity_filtered$spending
+activity_filtered$time_spending = activity_filtered$time * activity_filtered$spending
 
 # create interaction term between spending and treated
-activity_filtered$did2 = activity_filtered$spending * activity_filtered$treated
+activity_filtered$spending_treated = activity_filtered$spending * activity_filtered$treated
 
 # create interaction term between time, treated, and spending
-activity_filtered$did3 = activity_filtered$time * activity_filtered$treated * activity_filtered$spending
+activity_filtered$time_treated_spending = activity_filtered$time * activity_filtered$treated * activity_filtered$spending
 
 # estimate DID estimator
 didreg = lm(log(PageviewsPerMillion) ~ treated + time + spending + 
-              did + did1 + did2 + did3,
+              time_treated + time_spending + spending_treated + time_treated_spending,
             data = activity_filtered)
 summary(didreg)
