@@ -110,6 +110,7 @@ activity_filtered$oct2019_treated = activity_filtered$oct_2019 * activity_filter
 activity_filtered$nov2019_treated = activity_filtered$nov_2019 * activity_filtered$treated
 activity_filtered$dec2019_treated = activity_filtered$dec_2019 * activity_filtered$treated
 
+# activity_filtered = activity_filtered[activity_filtered$Url != "google.com", ]
 
 # estimate DID estimator
 didreg = lm(log(PageviewsPerMillion) ~ treated +
@@ -117,7 +118,7 @@ didreg = lm(log(PageviewsPerMillion) ~ treated +
               jan_2018 + feb_2018 + mar_2018 + apr_2018 + may_2018 + jun_2018 + jul_2018 + aug_2018 + sep_2018 + oct_2018 + nov_2018 + dec_2018 +
               jan_2019 + feb_2019 + mar_2019 + apr_2019 + may_2019 + jun_2019 + jul_2019 + aug_2019 + sep_2019 + oct_2019 + nov_2019 + dec_2019 +
               jan2017_treated + feb2017_treated + mar2017_treated + apr2017_treated + may2017_treated + jun2017_treated + jul2017_treated + aug2017_treated + sep2017_treated + oct2017_treated + nov2017_treated + dec2017_treated +
-              jan2018_treated + feb2018_treated + mar2018_treated + apr2018_treated + may2018_treated + jun2018_treated + jul2018_treated + aug2018_treated + sep2018_treated + oct2018_treated + nov2018_treated + dec2018_treated +
+              jan2018_treated + feb2018_treated + mar2018_treated + may2018_treated + jun2018_treated + jul2018_treated + aug2018_treated + sep2018_treated + oct2018_treated + nov2018_treated + dec2018_treated +
               jan2019_treated + feb2019_treated + mar2019_treated + apr2019_treated + may2019_treated + jun2019_treated + jul2019_treated + aug2019_treated + sep2019_treated + oct2019_treated + nov2019_treated + dec2019_treated,
             data = activity_filtered)
 summary(didreg)
@@ -125,8 +126,8 @@ summary(didreg)
 # graph coefficients
 coef <- tidy(didreg)
 coef = filter(coef, term %in% c('jan2017_treated', 'feb2017_treated', 'mar2017_treated', 'apr2017_treated', 'may2017_treated', 'jun2017_treated', 'jul2017_treated', 'aug2017_treated', 'sep2017_treated', 'oct2017_treated', 'nov2017_treated', 'dec2017_treated',
-                                'jan2018_treated', 'feb2018_treated', 'mar2018_treated', 'apr2018_treated', 'may2018_treated', 'jun2018_treated', 'jul2018_treated', 'aug2018_treated', 'sep2018_treated', 'oct2018_treated', 'nov2018_treated', 'dec2018_treated',
+                                'jan2018_treated', 'feb2018_treated', 'mar2018_treated', 'may2018_treated', 'jun2018_treated', 'jul2018_treated', 'aug2018_treated', 'sep2018_treated', 'oct2018_treated', 'nov2018_treated', 'dec2018_treated',
                                 'jan2019_treated', 'feb2019_treated', 'mar2019_treated', 'apr2019_treated', 'may2019_treated', 'jun2019_treated', 'jul2019_treated', 'aug2019_treated', 'sep2019_treated', 'oct2019_treated', 'nov2019_treated', 'dec2019_treated'))
 graph <- dwplot(coef,
-       vline = geom_vline(xintercept = 1.165637, colour = "grey60", linetype = 2))
+       vline = geom_vline(xintercept = -0.062060, colour = "grey60", linetype = 2))
 plot(graph)

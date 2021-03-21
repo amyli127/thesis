@@ -192,21 +192,22 @@ activity_filtered$oct2019_spending_treated = activity_filtered$oct_2019 * activi
 activity_filtered$nov2019_spending_treated = activity_filtered$nov_2019 * activity_filtered$spending * activity_filtered$treated
 activity_filtered$dec2019_spending_treated = activity_filtered$dec_2019 * activity_filtered$spending * activity_filtered$treated
 
+activity_filtered = activity_filtered[activity_filtered$Url != "google.com", ]
 
 # estimate DID estimator
 didreg = lm(log(PageviewsPerMillion) ~ treated + spending + 
               jan_2017 + feb_2017 + mar_2017 + apr_2017 + may_2017 + jun_2017 + jul_2017 + aug_2017 + sep_2017 + oct_2017 + nov_2017 + dec_2017 +
-              jan_2018 + feb_2018 + mar_2018 + apr_2018 + may_2018 + jun_2018 + jul_2018 + aug_2018 + sep_2018 + oct_2018 + nov_2018 + dec_2018 +
+              jan_2018 + feb_2018 + mar_2018 + may_2018 + jun_2018 + jul_2018 + aug_2018 + sep_2018 + oct_2018 + nov_2018 + dec_2018 +
               jan_2019 + feb_2019 + mar_2019 + apr_2019 + may_2019 + jun_2019 + jul_2019 + aug_2019 + sep_2019 + oct_2019 + nov_2019 + dec_2019 +
               treated_spending +
               jan2017_treated + feb2017_treated + mar2017_treated + apr2017_treated + may2017_treated + jun2017_treated + jul2017_treated + aug2017_treated + sep2017_treated + oct2017_treated + nov2017_treated + dec2017_treated +
-              jan2018_treated + feb2018_treated + mar2018_treated + apr2018_treated + may2018_treated + jun2018_treated + jul2018_treated + aug2018_treated + sep2018_treated + oct2018_treated + nov2018_treated + dec2018_treated +
+              jan2018_treated + feb2018_treated + mar2018_treated + may2018_treated + jun2018_treated + jul2018_treated + aug2018_treated + sep2018_treated + oct2018_treated + nov2018_treated + dec2018_treated +
               jan2019_treated + feb2019_treated + mar2019_treated + apr2019_treated + may2019_treated + jun2019_treated + jul2019_treated + aug2019_treated + sep2019_treated + oct2019_treated + nov2019_treated + dec2019_treated +
               jan2017_spending + feb2017_spending + mar2017_spending + apr2017_spending + may2017_spending + jun2017_spending + jul2017_spending + aug2017_spending + sep2017_spending + oct2017_spending + nov2017_spending + dec2017_spending +
-              jan2018_spending + feb2018_spending + mar2018_spending + apr2018_spending + may2018_spending + jun2018_spending + jul2018_spending + aug2018_spending + sep2018_spending + oct2018_spending + nov2018_spending + dec2018_spending +
+              jan2018_spending + feb2018_spending + mar2018_spending + may2018_spending + jun2018_spending + jul2018_spending + aug2018_spending + sep2018_spending + oct2018_spending + nov2018_spending + dec2018_spending +
               jan2019_spending + feb2019_spending + mar2019_spending + apr2019_spending + may2019_spending + jun2019_spending + jul2019_spending + aug2019_spending + sep2019_spending + oct2019_spending + nov2019_spending + dec2019_spending +
               jan2017_spending_treated + feb2017_spending_treated + mar2017_spending_treated + apr2017_spending_treated + may2017_spending_treated + jun2017_spending_treated + jul2017_spending_treated + aug2017_spending_treated + sep2017_spending_treated + oct2017_spending_treated + nov2017_spending_treated + dec2017_spending_treated +
-              jan2018_spending_treated + feb2018_spending_treated + mar2018_spending_treated + apr2018_spending_treated + may2018_spending_treated + jun2018_spending_treated + jul2018_spending_treated + aug2018_spending_treated + sep2018_spending_treated + oct2018_spending_treated + nov2018_spending_treated + dec2018_spending_treated +
+              jan2018_spending_treated + feb2018_spending_treated + mar2018_spending_treated + may2018_spending_treated + jun2018_spending_treated + jul2018_spending_treated + aug2018_spending_treated + sep2018_spending_treated + oct2018_spending_treated + nov2018_spending_treated + dec2018_spending_treated +
               jan2019_spending_treated + feb2019_spending_treated + mar2019_spending_treated + apr2019_spending_treated + may2019_spending_treated + jun2019_spending_treated + jul2019_spending_treated + aug2019_spending_treated + sep2019_spending_treated + oct2019_spending_treated + nov2019_spending_treated + dec2019_spending_treated,
             data = activity_filtered)
 summary(didreg)
@@ -214,8 +215,8 @@ summary(didreg)
 # graph coefficients
 coef <- tidy(didreg)
 coef = filter(coef, term %in% c('jan2017_spending_treated', 'feb2017_spending_treated', 'mar2017_spending_treated', 'apr2017_spending_treated', 'may2017_spending_treated', 'jun2017_spending_treated', 'jul2017_spending_treated', 'aug2017_spending_treated', 'sep2017_spending_treated', 'oct2017_spending_treated', 'nov2017_spending_treated', 'dec2017_spending_treated',
-                                'jan2018_spending_treated', 'feb2018_spending_treated', 'mar2018_spending_treated', 'apr2018_spending_treated', 'may2018_spending_treated', 'jun2018_spending_treated', 'jul2018_spending_treated', 'aug2018_spending_treated', 'sep2018_spending_treated', 'oct2018_spending_treated', 'nov2018_spending_treated', 'dec2018_spending_treated',
+                                'jan2018_spending_treated', 'feb2018_spending_treated', 'mar2018_spending_treated', 'may2018_spending_treated', 'jun2018_spending_treated', 'jul2018_spending_treated', 'aug2018_spending_treated', 'sep2018_spending_treated', 'oct2018_spending_treated', 'nov2018_spending_treated', 'dec2018_spending_treated',
                                 'jan2019_spending_treated', 'feb2019_spending_treated', 'mar2019_spending_treated', 'apr2019_spending_treated', 'may2019_spending_treated', 'jun2019_spending_treated', 'jul2019_spending_treated', 'aug2019_spending_treated', 'sep2019_spending_treated', 'oct2019_spending_treated', 'nov2019_spending_treated', 'dec2019_spending_treated'))
 graph <- dwplot(coef,
-                vline = geom_vline(xintercept = -0.748786, colour = "grey60", linetype = 2))
+                vline = geom_vline(xintercept = 0.044255, colour = "grey60", linetype = 2))
 plot(graph)

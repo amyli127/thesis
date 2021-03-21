@@ -13,11 +13,11 @@ activity_filtered <- activity_filtered[complete.cases(activity_filtered$wxad), ]
 activity_filtered$Date <- as.Date(activity_filtered$Date , format = "%Y-%m-%d")
 
 # create dummy var to indicate > or <= median xad
-med_xad = median(activity_filtered$wxad)
+med_revt = median(activity_filtered$revt)
 #mean_xad = mean(activity_filtered$xad)
 #quantiles = quantile(activity_filtered$xad, c(0.25, 0.75))
 #twentyfifth_percentile = quantiles[[1]]
-activity_filtered$spending = ifelse(activity_filtered$wxad <= med_xad, 0, 1)
+activity_filtered$spending = ifelse(activity_filtered$revt <= med_revt, 0, 1)
 
 # create dummy var to indicate before or after treatment
 treatment_date = as.Date("2018-05-18")
@@ -37,8 +37,6 @@ activity_filtered$spending_treated = activity_filtered$spending * activity_filte
 
 # create interaction term between time, treated, and spending
 activity_filtered$time_treated_spending = activity_filtered$time * activity_filtered$treated * activity_filtered$spending
-
-#activity_filtered = activity_filtered[activity_filtered$Url != "google.com", ]
 
 # estimate DID estimator
 didreg = lm(log(PageviewsPerMillion) ~ treated + time + spending + 
