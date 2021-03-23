@@ -1,8 +1,15 @@
 library(foreign)
 library(lubridate)
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+library(broom)
+library(dotwhisker)
+library(broom)
+library(dplyr)
 
 # read in data
-activity <- read.csv('total-info-weighted-2017-2019.csv', header=TRUE, sep=',')
+activity <- read.csv('total-info-weighted-2017-2019-new.csv', header=TRUE, sep=',')
 us_sites <- read.csv('sites/us.txt', header=FALSE)
 
 # filter data
@@ -192,10 +199,13 @@ activity_filtered$oct2019_spending_treated = activity_filtered$oct_2019 * activi
 activity_filtered$nov2019_spending_treated = activity_filtered$nov_2019 * activity_filtered$spending * activity_filtered$treated
 activity_filtered$dec2019_spending_treated = activity_filtered$dec_2019 * activity_filtered$spending * activity_filtered$treated
 
-activity_filtered = activity_filtered[activity_filtered$Url != "google.com", ]
+# activity_filtered = activity_filtered[activity_filtered$Url != "google.com", ]
+
+# URL fixed effects
+activity_filtered$url_bin <- as.factor(activity_filtered$Url)
 
 # estimate DID estimator
-didreg = lm(log(PageviewsPerMillion) ~ treated + spending + 
+didreg = lm(log(PageviewsPerMillion) ~ treated + spending + url_bin +
               jan_2017 + feb_2017 + mar_2017 + apr_2017 + may_2017 + jun_2017 + jul_2017 + aug_2017 + sep_2017 + oct_2017 + nov_2017 + dec_2017 +
               jan_2018 + feb_2018 + mar_2018 + may_2018 + jun_2018 + jul_2018 + aug_2018 + sep_2018 + oct_2018 + nov_2018 + dec_2018 +
               jan_2019 + feb_2019 + mar_2019 + apr_2019 + may_2019 + jun_2019 + jul_2019 + aug_2019 + sep_2019 + oct_2019 + nov_2019 + dec_2019 +
@@ -218,5 +228,5 @@ coef = filter(coef, term %in% c('jan2017_spending_treated', 'feb2017_spending_tr
                                 'jan2018_spending_treated', 'feb2018_spending_treated', 'mar2018_spending_treated', 'may2018_spending_treated', 'jun2018_spending_treated', 'jul2018_spending_treated', 'aug2018_spending_treated', 'sep2018_spending_treated', 'oct2018_spending_treated', 'nov2018_spending_treated', 'dec2018_spending_treated',
                                 'jan2019_spending_treated', 'feb2019_spending_treated', 'mar2019_spending_treated', 'apr2019_spending_treated', 'may2019_spending_treated', 'jun2019_spending_treated', 'jul2019_spending_treated', 'aug2019_spending_treated', 'sep2019_spending_treated', 'oct2019_spending_treated', 'nov2019_spending_treated', 'dec2019_spending_treated'))
 graph <- dwplot(coef,
-                vline = geom_vline(xintercept = 0.044255, colour = "grey60", linetype = 2))
+                vline = geom_vline(xintercept = 0.053314, colour = "grey60", linetype = 2))
 plot(graph)

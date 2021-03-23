@@ -7,7 +7,7 @@ library(sjlabelled)
 library(lme4)
 
 # read in data
-activity <- read.csv('total-info-2018.csv', header=TRUE, sep=',')
+activity <- read.csv('total-info-2017-2019.csv', header=TRUE, sep=',')
 us_sites <- read.csv('sites/us.txt', header=FALSE)
 
 # filter data
@@ -37,13 +37,16 @@ activity_filtered$time_treated = activity_filtered$time * activity_filtered$trea
 activity_filtered$month_treated = activity_filtered$month * activity_filtered$treated
 
 # FILTER TO 10 WEEKS BEFORE AND AFTER
-activity_filtered = activity_filtered[activity_filtered$week >= 11 & activity_filtered$week <= 31, ]
+activity_filtered = activity_filtered[activity_filtered$yr_week >= 63 & activity_filtered$yr_week <= 83, ]
 
 # activity_filtered$new_month <- as.factor(activity_filtered$month)
 activity_filtered$week_bin <- as.factor(activity_filtered$yr_week)
 activity_filtered <- within(activity_filtered, week_bin <- relevel(week_bin, ref = "72"))
 
+# URL fixed effects
 activity_filtered$url_bin <- as.factor(activity_filtered$Url)
+
+
 # activity_filtered <- within(activity_filtered, url_bin <- relevel(url_bin, ref = "google.com"))
 
 #activity_filtered = activity_filtered[activity_filtered$Url != "google.com", ]
@@ -52,7 +55,11 @@ activity_filtered$url_bin <- as.factor(activity_filtered$Url)
 didreg = lm(log(PageviewsPerMillion) ~ treated + time_treated + week_bin + url_bin,
             data = activity_filtered)
 
-# lmer(didreg, REML = FALSE, data = activity_filtered)
+didreg_pageviewsperuser = lm(log(PageviewsPerUser) ~ treated + time_treated + week_bin + url_bin,
+                                  data = activity_filtered)
+
+didreg_reach = lm(log(ReachPerMillion) ~ treated + time_treated + week_bin + url_bin,
+                    data = activity_filtered)
 
 tab_model(didreg, didregyr, didregtwoyr, 
           terms = c("treated", "time_treated"), 
@@ -62,5 +69,23 @@ tab_model(didreg, didregyr, didregtwoyr,
           dv.labels = c("Week 11-Week 31 (2018)", "2018", "2017-2019"),
           string.pred = "Coeffcient",
           string.est = "log(PageviewsPerMillion)")
+
+tab_model(didreg_pageviewsperuser, didregyr_pageviewsperuser, didregtwoyr_pageviewsperuser, 
+          terms = c("treated", "time_treated"), 
+          p.style = "stars",
+          collapse.se = TRUE,
+          show.ci = FALSE,
+          dv.labels = c("Week 11-Week 31 (2018)", "2018", "2017-2019"),
+          string.pred = "Coeffcient",
+          string.est = "log(Pageviews Per User)")
+
+tab_model(didreg_reach, didregyr_reach, didregtwoyr_reach, 
+          terms = c("treated", "time_treated"), 
+          p.style = "stars",
+          collapse.se = TRUE,
+          show.ci = FALSE,
+          dv.labels = c("Week 11-Week 31 (2018)", "2018", "2017-2019"),
+          string.pred = "Coeffcient",
+          string.est = "log(Reach Per Million)")
 
 summary(didreg)

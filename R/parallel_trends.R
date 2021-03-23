@@ -30,7 +30,6 @@ graph <- ggplot(data=agg, aes(x=Group.date, y=PageviewsPerMillion, group=Group.2
        x ="Date", y = "Pageviews Per Million")
 
 
-
 # agg = aggregate(x = activity_filtered[c("PageviewsPerMillion")],
 #                 by = list(Group.date = activity_filtered$Date, activity_filtered$treated, activity_filtered$Url),
 #                 FUN=sum,

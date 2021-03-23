@@ -4,6 +4,9 @@ library(ggplot2)
 library(broom)
 library(dotwhisker)
 library(dplyr)
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
 
 # read in data
 activity <- read.csv('total-info-2017-2019.csv', header=TRUE, sep=',')
@@ -126,8 +129,19 @@ summary(didreg)
 # graph coefficients
 coef <- tidy(didreg)
 coef = filter(coef, term %in% c('jan2017_treated', 'feb2017_treated', 'mar2017_treated', 'apr2017_treated', 'may2017_treated', 'jun2017_treated', 'jul2017_treated', 'aug2017_treated', 'sep2017_treated', 'oct2017_treated', 'nov2017_treated', 'dec2017_treated',
-                                'jan2018_treated', 'feb2018_treated', 'mar2018_treated', 'may2018_treated', 'jun2018_treated', 'jul2018_treated', 'aug2018_treated', 'sep2018_treated', 'oct2018_treated', 'nov2018_treated', 'dec2018_treated',
+                                'jan2018_treated', 'feb2018_treated', 'mar2018_treated', 'apr2018_treated', 'may2018_treated', 'jun2018_treated', 'jul2018_treated', 'aug2018_treated', 'sep2018_treated', 'oct2018_treated', 'nov2018_treated', 'dec2018_treated',
                                 'jan2019_treated', 'feb2019_treated', 'mar2019_treated', 'apr2019_treated', 'may2019_treated', 'jun2019_treated', 'jul2019_treated', 'aug2019_treated', 'sep2019_treated', 'oct2019_treated', 'nov2019_treated', 'dec2019_treated'))
 graph <- dwplot(coef,
        vline = geom_vline(xintercept = -0.062060, colour = "grey60", linetype = 2))
 plot(graph)
+
+tab_model(didreg,
+          terms = c("treated", "time_treated",
+                    'jan2017_treated', 'feb2017_treated', 'mar2017_treated', 'apr2017_treated', 'may2017_treated', 'jun2017_treated', 'jul2017_treated', 'aug2017_treated', 'sep2017_treated', 'oct2017_treated', 'nov2017_treated', 'dec2017_treated',
+                                'jan2018_treated', 'feb2018_treated', 'mar2018_treated', 'apr2018_treated', 'may2018_treated', 'jun2018_treated', 'jul2018_treated', 'aug2018_treated', 'sep2018_treated', 'oct2018_treated', 'nov2018_treated', 'dec2018_treated',
+                                'jan2019_treated', 'feb2019_treated', 'mar2019_treated', 'apr2019_treated', 'may2019_treated', 'jun2019_treated', 'jul2019_treated', 'aug2019_treated', 'sep2019_treated', 'oct2019_treated', 'nov2019_treated', 'dec2019_treated'), 
+          p.style = "stars",
+          collapse.se = TRUE,
+          show.ci = FALSE,
+          string.pred = "Coeffcient",
+          string.est = "log(PageviewsPerMillion)")

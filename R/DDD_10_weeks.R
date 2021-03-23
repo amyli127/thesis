@@ -1,8 +1,11 @@
 library(foreign)
 library(lubridate)
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
 
 # read in data
-activity <- read.csv('total-info-weighted-2018.csv', header=TRUE, sep=',')
+activity <- read.csv('total-info-weighted-2018-new.csv', header=TRUE, sep=',')
 us_sites <- read.csv('sites/us.txt', header=FALSE)
 
 # filter data
@@ -41,15 +44,35 @@ activity_filtered$spending_treated = activity_filtered$spending * activity_filte
 # create interaction term between time, treated, and spending
 activity_filtered$time_treated_spending = activity_filtered$time * activity_filtered$treated * activity_filtered$spending
 
-# activity_filtered = activity_filtered[activity_filtered$week >= 11 & activity_filtered$week <= 31, ]
+activity_filtered = activity_filtered[activity_filtered$week >= 11 & activity_filtered$week <= 31, ]
 activity_filtered$week_bin <- as.factor(activity_filtered$week)
 activity_filtered$month_bin <- as.factor(activity_filtered$yr_month)
 
 activity_filtered <- within(activity_filtered, week_bin <- relevel(week_bin, ref = "20"))
 activity_filtered <- within(activity_filtered, month_bin <- relevel(month_bin, ref = "17"))
 
+# URL fixed effects
+activity_filtered$url_bin <- as.factor(activity_filtered$Url)
+
 # estimate DID estimator
-didreg = lm(log(PageviewsPerMillion) ~ treated + time + spending + 
-              time_treated + time_spending + spending_treated + time_treated_spending + month_bin,
+dddreg = lm(log(PageviewsPerMillion) ~ treated + spending + 
+              time_treated + time_spending + spending_treated + time_treated_spending + week_bin + url_bin,
             data = activity_filtered)
-summary(didreg)
+
+dddreg_peruser = lm(log(PageviewsPerUser) ~ treated + spending + 
+              time_treated + time_spending + spending_treated + time_treated_spending + week_bin + url_bin,
+            data = activity_filtered)
+
+dddreg_reach = lm(log(ReachPerMillion) ~ treated + spending + 
+                      time_treated + time_spending + spending_treated + time_treated_spending + week_bin + url_bin,
+                    data = activity_filtered)
+
+
+tab_model(dddreg, dddreg_peruser, dddreg_reach,
+          terms = c("time_treated_spending"),
+          p.style = "stars",
+          collapse.se = TRUE,
+          show.ci = FALSE,
+          string.pred = "Coeffcient")
+
+summary(dddreg)

@@ -49,6 +49,12 @@ activity_filtered$url_bin <- as.factor(activity_filtered$Url)
 didregyr = lm(log(PageviewsPerMillion) ~ treated + time_treated + week_bin + url_bin,
             data = activity_filtered)
 
+didregyr_pageviewsperuser = lm(log(PageviewsPerUser) ~ treated + time_treated + week_bin + url_bin,
+                                  data = activity_filtered)
+
+didregyr_reach = lm(log(ReachPerMillion) ~ treated + time_treated + week_bin + url_bin,
+                               data = activity_filtered)
+
 # lmer(didreg, REML = FALSE, data = activity_filtered)
 
 tab_model(didregyr, terms = c("treated", "time_treated"), p.style = "stars")

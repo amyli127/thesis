@@ -49,6 +49,12 @@ activity_filtered$url_bin <- as.factor(activity_filtered$Url)
 didregtwoyr = lm(log(PageviewsPerMillion) ~ treated + time_treated + week_bin + url_bin,
               data = activity_filtered)
 
+didregtwoyr_pageviewsperuser = lm(log(PageviewsPerUser) ~ treated + time_treated + week_bin + url_bin,
+                 data = activity_filtered)
+
+didregtwoyr_reach = lm(log(ReachPerMillion) ~ treated + time_treated + week_bin + url_bin,
+                    data = activity_filtered)
+
 # lmer(didreg, REML = FALSE, data = activity_filtered)
 
 tab_model(didregtwoyr, terms = c("treated", "time_treated"), p.style = "stars")

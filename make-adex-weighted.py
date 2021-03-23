@@ -1,5 +1,5 @@
 import csv
-
+import datetime
 
 url_to_sum = {}                 # map from url to sum of pageviews (used to calc avg)
 url_to_count = {}               # map from url to number of occurrences (used to calc avg)
@@ -11,10 +11,17 @@ ticker_to_pageviews = {}
 
 url_to_proportional_adex = {}   
 
+CUTOFF_DATE = datetime.datetime.strptime("2017-01-31", "%Y-%m-%d")
+
 # read in pageview info
 with open("data/total-info-2017.csv", "r") as total_activity:
     reader = csv.DictReader(total_activity)
     for row in reader:
+        date = row["Date"]
+        dt = datetime.datetime.strptime(date, "%Y-%m-%d")
+        if (dt > CUTOFF_DATE):
+            continue
+
         url = row["Url"]
         adex = row["xad"]
         pageviews = row["PageviewsPerMillion"]
@@ -55,8 +62,8 @@ for url in url_to_sum:
 HEADER = "Url,Date,PageviewsPerMillion,PageviewsPerUser,Rank,ReachPerMillion,gvkey,datadate,fyear,tic,conm,curcd,revt,sale,xad,exch,wxad\n"
 
 # write weighted adex
-with open("data/total-info-2017-2019.csv", "r") as total_activity, open("data/total-info-2017-2019.csv", "r") as total_activity1:
-    with open("data/total-info-weighted-2017-2019.csv", "w") as output:
+with open("data/total-info-2018.csv", "r") as total_activity, open("data/total-info-2018.csv", "r") as total_activity1:
+    with open("data/total-info-weighted-2018-new.csv", "w") as output:
         reader = csv.DictReader(total_activity)
         for i, (forUrl, toRead) in enumerate(zip(reader, total_activity1)):
             if i == 0:
@@ -64,5 +71,8 @@ with open("data/total-info-2017-2019.csv", "r") as total_activity, open("data/to
             else:
                 url = forUrl["Url"]
                 toRead = toRead.rstrip('\n')
-                newline = toRead + "," + str(url_to_proportional_adex[url]) + '\n'
+                adex = str(0.00)
+                if url in url_to_proportional_adex:
+                    adex = str(url_to_proportional_adex[url])
+                newline = toRead + "," + adex + '\n'
                 output.write(newline)
