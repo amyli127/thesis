@@ -4,6 +4,7 @@ import csv
 adex_info = {}          # map from ticker to line of adex info
 url_to_ticker = {}      # dict from url to ticker
 
+
 HEADER = "Url,Date,PageviewsPerMillion,PageviewsPerUser,Rank,ReachPerMillion,gvkey,datadate,fyear,tic,conm,curcd,revt,sale,xad,exch\n"
 
 # populate adex info
