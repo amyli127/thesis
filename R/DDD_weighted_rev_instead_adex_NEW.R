@@ -5,6 +5,8 @@ library(sjPlot)
 library(sjmisc)
 library(sjlabelled)
 
+library(stargazer)
+
 # read in data
 activity <- read.csv('total-info-weighted-2018.csv', header=TRUE, sep=',')
 us_sites <- read.csv('sites/us.txt', header=FALSE)
@@ -69,11 +71,19 @@ dddreg_reach = lm(log(ReachPerMillion) ~ treated + spending +
                   data = activity_filtered)
 
 
-tab_model(dddreg, dddreg_peruser, dddreg_reach,
+tab_model(dddreg, dddreg_censored, dddreg_peruser, dddreg_peruser_censored, dddreg_reach, dddreg_reach_censored,
           terms = c("time_treated_spending"),
           p.style = "stars",
           collapse.se = TRUE,
           show.ci = FALSE,
           string.pred = "Coeffcient")
+
+
+output <- capture.output(
+  stargazer(dddreg, dddreg_censored, dddreg_peruser, dddreg_peruser_censored, dddreg_reach, dddreg_reach_censored,
+            title="Results",
+            align=TRUE))
+cat(paste(output, collapse = "\n"), "\n", file="table_rev", append=FALSE)
+
 
 summary(dddreg)

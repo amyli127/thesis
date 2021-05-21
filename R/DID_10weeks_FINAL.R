@@ -6,6 +6,8 @@ library(sjmisc)
 library(sjlabelled)
 library(lme4)
 
+library(stargazer)
+
 # read in data
 activity <- read.csv('total-info-2017-2019.csv', header=TRUE, sep=',')
 us_sites <- read.csv('sites/us.txt', header=FALSE)
@@ -61,31 +63,20 @@ didreg_pageviewsperuser = lm(log(PageviewsPerUser) ~ treated + time_treated + we
 didreg_reach = lm(log(ReachPerMillion) ~ treated + time_treated + week_bin + url_bin,
                     data = activity_filtered)
 
-tab_model(didreg, didregyr, didregtwoyr, 
+tab_model(didreg, didreg_pageviewsperuser, didreg_reach, 
           terms = c("treated", "time_treated"), 
           p.style = "stars",
           collapse.se = TRUE,
           show.ci = FALSE,
-          dv.labels = c("Week 11-Week 31 (2018)", "2018", "2017-2019"),
-          string.pred = "Coeffcient",
-          string.est = "log(PageviewsPerMillion)")
+          string.pred = "Coeffcient")
 
-tab_model(didreg_pageviewsperuser, didregyr_pageviewsperuser, didregtwoyr_pageviewsperuser, 
-          terms = c("treated", "time_treated"), 
-          p.style = "stars",
-          collapse.se = TRUE,
-          show.ci = FALSE,
-          dv.labels = c("Week 11-Week 31 (2018)", "2018", "2017-2019"),
-          string.pred = "Coeffcient",
-          string.est = "log(Pageviews Per User)")
 
-tab_model(didreg_reach, didregyr_reach, didregtwoyr_reach, 
-          terms = c("treated", "time_treated"), 
-          p.style = "stars",
-          collapse.se = TRUE,
-          show.ci = FALSE,
-          dv.labels = c("Week 11-Week 31 (2018)", "2018", "2017-2019"),
-          string.pred = "Coeffcient",
-          string.est = "log(Reach Per Million)")
+output <- capture.output(
+  stargazer(didreg, didreg_pageviewsperuser, didreg_reach,
+            title="Results",
+            align=TRUE))
+cat(paste(output, collapse = "\n"), "\n", file="table_did", append=FALSE)
+
+
 
 summary(didreg)

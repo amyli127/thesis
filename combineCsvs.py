@@ -1,5 +1,6 @@
 import csv
 
+
 fileReader = open("GOOGL_2018_XAD.csv", "r")
 csvReader = csv.reader(fileReader)
 
